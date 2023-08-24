@@ -9,7 +9,7 @@ import 'package:posts_clean_architecture/features/posts/presentation/bloc/posts/
 
 class PostsBloc extends Bloc<PostsEvent, PostsState>{
   final GetAllPostsUseCase getAllPostsUseCase;
-  PostsBloc(super.initialState, this.getAllPostsUseCase){
+  PostsBloc({required this.getAllPostsUseCase}): super(PostsInitial()){
     on<PostsEvent>((event, emit) async {
       if(event is GetAllPostEvent){
         emit(LoadingPostsState());

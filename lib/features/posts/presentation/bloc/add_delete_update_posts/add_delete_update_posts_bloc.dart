@@ -14,7 +14,7 @@ class AddDeleteUpdatePostBloc extends Bloc<AddDeleteUpdatePostsEvent, AddDeleteU
   final DeletePostUseCase deletePost;
   final UpdatePostUseCase updatePost;
 
-  AddDeleteUpdatePostBloc(super.initialState, this.addPost, this.deletePost, this.updatePost){
+  AddDeleteUpdatePostBloc({required this.addPost,required this.deletePost,required this.updatePost}): super(AddDeletUpdatePostInitial()){
     on<AddDeleteUpdatePostsEvent>((event, emit) async{
       if(event is AddPostEvent){
         emit(LoadingAddDeletUpdatePost());
