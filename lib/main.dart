@@ -10,6 +10,8 @@ import 'package:posts_clean_architecture/features/posts/data/repositories/post_r
 import 'package:posts_clean_architecture/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:posts_clean_architecture/features/posts/presentation/bloc/add_delete_update_posts/add_delete_update_posts_bloc.dart';
 import 'package:posts_clean_architecture/features/posts/presentation/bloc/posts/posts_bloc.dart';
+import 'package:posts_clean_architecture/features/posts/presentation/bloc/posts/posts_event.dart';
+import 'package:posts_clean_architecture/features/posts/presentation/pages/posts_page.dart';
 import 'injection_container.dart' as di;
 
 
@@ -26,23 +28,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_)=> di.sl<PostsBloc>()),
+          BlocProvider(create: (_)=> di.sl<PostsBloc>()..add(GetAllPostEvent())),
           BlocProvider(create: (_)=> di.sl<AddDeleteUpdatePostBloc>()),
         ],
         child: MaterialApp(
       showSemanticsDebugger: false,
       title: 'Posts App',
       theme: appTheme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Posts App'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      home: PostsPage(),
     ));
   }
 }

@@ -9,7 +9,7 @@ abstract class AddDeleteUpdatePostState extends Equatable{
 
 class AddDeletUpdatePostInitial extends AddDeleteUpdatePostState{}
 
-class LoadingAddDeletUpdatePost extends AddDeleteUpdatePostState{}
+class LoadingAddDeletUpdatePostState extends AddDeleteUpdatePostState{}
 
 class ErrorAddDeletUpdatePostState extends AddDeleteUpdatePostState{
   final String message;
@@ -20,10 +20,10 @@ class ErrorAddDeletUpdatePostState extends AddDeleteUpdatePostState{
   List<Object> get props => [message];
 }
 
-class MessageAddDeletUpdatePost extends AddDeleteUpdatePostState{
+class MessageAddDeleteUpdatePost extends AddDeleteUpdatePostState{
   final String message;
 
-  MessageAddDeletUpdatePost({required this.message});
+  MessageAddDeleteUpdatePost({required this.message});
 
   @override
   List<Object> get props => [message];

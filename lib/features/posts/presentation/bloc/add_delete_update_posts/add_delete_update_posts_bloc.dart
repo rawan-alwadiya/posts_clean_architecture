@@ -17,21 +17,21 @@ class AddDeleteUpdatePostBloc extends Bloc<AddDeleteUpdatePostsEvent, AddDeleteU
   AddDeleteUpdatePostBloc({required this.addPost,required this.deletePost,required this.updatePost}): super(AddDeletUpdatePostInitial()){
     on<AddDeleteUpdatePostsEvent>((event, emit) async{
       if(event is AddPostEvent){
-        emit(LoadingAddDeletUpdatePost());
+        emit(LoadingAddDeletUpdatePostState());
 
         final failureOrDoneMessage = await addPost(event.post);
 
         emit(_eitherDoneMessageOrErrorState(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
 
       }else if(event is UpdatePostEvent){
-        emit(LoadingAddDeletUpdatePost());
+        emit(LoadingAddDeletUpdatePostState());
 
         final failureOrDoneMessage = await updatePost(event.post);
 
         emit(_eitherDoneMessageOrErrorState(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
 
       }else if(event is DeletePostEvent){
-        emit(LoadingAddDeletUpdatePost());
+        emit(LoadingAddDeletUpdatePostState());
 
         final failureOrDoneMessage = await deletePost(event.postId);
 
@@ -43,7 +43,7 @@ class AddDeleteUpdatePostBloc extends Bloc<AddDeleteUpdatePostsEvent, AddDeleteU
   AddDeleteUpdatePostState _eitherDoneMessageOrErrorState(Either<Failure, Unit> either, message){
     return either.fold(
             (failure) => ErrorAddDeletUpdatePostState(message: _mapFailureMessage(failure)),
-            (_) => MessageAddDeletUpdatePost(message: message)
+            (_) => MessageAddDeleteUpdatePost(message: message)
     );
   }
 
